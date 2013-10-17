@@ -37,10 +37,10 @@ post '/trick/?' do
     redirect to("/chaos/")
   else
     puts Pusher['trick_channel'].trigger('orange', {:message => 'orange'})
-    response = Twilio::TwiML::Response.new do |r|
-      r.Sms 'Available Commands: orange, blue, red, green, purple, chaos'
+    resp = Twilio::TwiML::Response.new do |r|
+      r.Sms "Available Commands: orange, blue, red, green, purple, chaos"
     end
-    response.text
+    resp.text
   end
 
   if params['SmsSid'] == nil
