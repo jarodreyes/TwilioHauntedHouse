@@ -9,37 +9,43 @@ before do
 end
 
 get '/chaos/' do
-  Pusher['trick_channel'].trigger('chaos', {:message => 'chaos ensued'})
   erb :chaos
 end
 
 get '/trick/?' do
   output = "Message transmitted"
-  command = params['Body'].downcase
   begin
-    Pusher['trick_channel'].trigger('starting:', {:message => command})
+    Pusher['trick_channel'].trigger('starting:', {:message => 'starting up trick'})
   rescue Pusher::Error => e
     output = "Failed: #{e.message}"
   end
   # Switch colors
-  case command
-  when 'purple'
-    puts Pusher['trick_channel'].trigger('purple', {:message => 'purple'})
-  when 'blue'
-    puts Pusher['trick_channel'].trigger('blue', {:message => 'blue'})
-  when 'red'
-    puts Pusher['trick_channel'].trigger('red', {:message => 'red'})
-  when 'green'
-    puts Pusher['trick_channel'].trigger('green', {:message => 'green'})
-  when 'bats'
-    puts Pusher['trick_channel'].trigger('bats', {:message => 'go bats'})
-  when 'orange'
-    puts Pusher['trick_channel'].trigger('orange', {:message => 'orange'})
-  else
-    resp = Twilio::TwiML::Response.new do |r|
-      r.Sms "Available Commands: orange, blue, red, green, purple, chaos"
+  begin
+    command = params['Body'].downcase
+    case command
+    when 'purple'
+      puts Pusher['trick_channel'].trigger('purple', {:message => 'purple'})
+    when 'blue'
+      puts Pusher['trick_channel'].trigger('blue', {:message => 'blue'})
+    when 'red'
+      puts Pusher['trick_channel'].trigger('red', {:message => 'red'})
+    when 'green'
+      puts Pusher['trick_channel'].trigger('green', {:message => 'green'})
+    when 'bats'
+      puts Pusher['trick_channel'].trigger('bats', {:message => 'go bats'})
+    when 'orange'
+      puts Pusher['trick_channel'].trigger('orange', {:message => 'orange'})
+    when 'chaos'
+      puts Pusher['trick_channel'].trigger('chaos', {:message => 'unleash'})
+      redirect '/chaos/'
+    else
+      resp = Twilio::TwiML::Response.new do |r|
+        r.Sms "Available Commands: orange, blue, red, green, purple, chaos"
+      end
+      puts resp.text
     end
-    resp.text
+  rescue
+    command = "no message"
   end
 
   if params['SmsSid'] == nil
@@ -49,10 +55,6 @@ get '/trick/?' do
       r.Sms output
     end
     response.text
-  end
-
-  if command == 'chaos'
-    redirect "/chaos/"
   end
 end
 
