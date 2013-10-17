@@ -33,14 +33,15 @@ post '/trick/?' do
     puts Pusher['trick_channel'].trigger('green', {:message => 'green'})
   when 'bats'
     puts Pusher['trick_channel'].trigger('bats', {:message => 'go bats'})
+  when 'orange'
+    puts Pusher['trick_channel'].trigger('orange', {:message => 'orange'})
   when 'chaos'
     redirect to("/chaos/")
   else
-    puts Pusher['trick_channel'].trigger('orange', {:message => 'orange'})
     resp = Twilio::TwiML::Response.new do |r|
       r.Sms "Available Commands: orange, blue, red, green, purple, chaos"
     end
-    resp.text
+    puts resp.text
   end
 
   if params['SmsSid'] == nil
