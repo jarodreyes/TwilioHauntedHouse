@@ -13,7 +13,7 @@ get '/chaos/' do
   erb :chaos
 end
 
-post '/trick/?' do
+get '/trick/?' do
   output = "Message transmitted"
   command = params['Body'].downcase
   begin
@@ -39,7 +39,7 @@ post '/trick/?' do
     resp = Twilio::TwiML::Response.new do |r|
       r.Sms "Available Commands: orange, blue, red, green, purple, chaos"
     end
-    puts resp.text
+    resp.text
   end
 
   if params['SmsSid'] == nil
@@ -52,7 +52,7 @@ post '/trick/?' do
   end
 
   if command == 'chaos'
-    redirect to("/chaos/")
+    redirect "/chaos/"
   end
 end
 
