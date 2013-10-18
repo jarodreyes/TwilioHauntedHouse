@@ -37,7 +37,6 @@ get '/trick/?' do
       puts Pusher['trick_channel'].trigger('orange', {:message => 'orange'})
     when 'chaos'
       puts Pusher['trick_channel'].trigger('chaos', {:message => 'unleash'})
-      redirect '/chaos/'
     else
       resp = Twilio::TwiML::Response.new do |r|
         r.Sms "Available Commands: orange, blue, red, green, purple, chaos"

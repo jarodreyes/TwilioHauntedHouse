@@ -2,5 +2,5 @@
 var _this = this;
 
 setTimeout(function() {
-  return document.location = '/index';
+  return document.location = '/';
 }, 45000);
