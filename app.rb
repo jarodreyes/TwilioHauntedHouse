@@ -13,20 +13,6 @@ get '/chaos/' do
   erb :chaos
 end
 
-get '/patrick/' do
-  response = Twilio::TwiML::Response.new do |r|
-    r.Sms 'Hello Patrick. Thanks for texting.'
-  end
-  response.text
-end
-
-get '/patricksay/' do
-  response = Twilio::TwiML::Response.new do |r|
-    r.Say 'Hello Patrick. Thanks for calling.'
-  end
-  response.text
-end
-
 get '/trick/?' do
   output = "Message transmitted"
   begin
