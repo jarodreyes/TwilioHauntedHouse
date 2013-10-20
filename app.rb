@@ -18,7 +18,13 @@ get '/patrick/' do
     r.Sms 'Hello Patrick. Thanks for texting.'
   end
   response.text
+end
 
+get '/patrick/' do
+  response = Twilio::TwiML::Response.new do |r|
+    r.Say 'Hello Patrick. Thanks for calling.'
+  end
+  response.text
 end
 
 get '/trick/?' do
