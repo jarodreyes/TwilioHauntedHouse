@@ -20,7 +20,7 @@ get '/patrick/' do
   response.text
 end
 
-get '/patrick/' do
+get '/patricksay/' do
   response = Twilio::TwiML::Response.new do |r|
     r.Say 'Hello Patrick. Thanks for calling.'
   end
