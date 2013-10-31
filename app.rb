@@ -48,6 +48,7 @@ get '/trick/?' do
       end
       puts resp.text
     else
+      puts Pusher['trick_channel'].trigger(command, {:message => command})
       resp = Twilio::TwiML::Response.new do |r|
         r.Sms "Available Commands: orange, blue, red, green, purple, chaos"
       end
