@@ -44,8 +44,6 @@ get '/trick/?' do
       puts Pusher['trick_channel'].trigger('chaos', {:message => 'unleash'})
     when 'trick'
       output = "Available Tricks: orange, blue, red, green, purple, trex, sing or chaos."
-      end
-      puts resp.text
     else
       puts Pusher['trick_channel'].trigger(command, {:message => command})
     end
