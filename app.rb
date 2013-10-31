@@ -42,15 +42,15 @@ get '/trick/?' do
       puts Pusher['trick_channel'].trigger('orange', {:message => 'orange'})
     when 'chaos'
       puts Pusher['trick_channel'].trigger('chaos', {:message => 'unleash'})
-    when 'help'
+    when 'trick'
       resp = Twilio::TwiML::Response.new do |r|
-        r.Sms "Available Commands: orange, blue, red, green, purple, chaos"
+        r.Sms "Available Commands: orange, blue, red, green, purple, trex, sing or chaos."
       end
       puts resp.text
     else
       puts Pusher['trick_channel'].trigger(command, {:message => command})
       resp = Twilio::TwiML::Response.new do |r|
-        r.Sms "Available Commands: orange, blue, red, green, purple, chaos"
+        r.Sms "Available Commands: orange, blue, red, green, purple, trex, sing or chaos."
       end
       puts resp.text
     end
