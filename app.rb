@@ -13,6 +13,10 @@ get '/chaos/' do
   erb :chaos
 end
 
+get '/live?*' do
+  erb :live
+end
+
 get '/trick/?' do
   output = "Our ghoulish ghosts have heard your wish. Happy Halloween! Text 'help' to see a list of instructions."
   begin
