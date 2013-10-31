@@ -18,7 +18,7 @@ get '/live?*' do
 end
 
 get '/trick/?' do
-  output = "Our ghoulish ghosts have heard your wish. Happy Halloween! Text 'help' to see a list of instructions."
+  output = "Our ghoulish ghosts have heard your wish. Happy Halloween! Text 'trick' to see a list of haunted commands."
   begin
     Pusher['trick_channel'].trigger('starting:', {:message => 'starting up trick'})
   rescue Pusher::Error => e
@@ -43,16 +43,11 @@ get '/trick/?' do
     when 'chaos'
       puts Pusher['trick_channel'].trigger('chaos', {:message => 'unleash'})
     when 'trick'
-      resp = Twilio::TwiML::Response.new do |r|
-        r.Sms "Available Commands: orange, blue, red, green, purple, trex, sing or chaos."
+      output = "Available Tricks: orange, blue, red, green, purple, trex, sing or chaos."
       end
       puts resp.text
     else
       puts Pusher['trick_channel'].trigger(command, {:message => command})
-      resp = Twilio::TwiML::Response.new do |r|
-        r.Sms "Available Commands: orange, blue, red, green, purple, trex, sing or chaos."
-      end
-      puts resp.text
     end
   rescue
     command = "no message"
