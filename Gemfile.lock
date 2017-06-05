@@ -33,5 +33,9 @@ PLATFORMS
 DEPENDENCIES
   pusher
   pusher-client
+  rack (< 2.0)
   sinatra
   twilio-ruby
+
+BUNDLED WITH
+   1.15.1
