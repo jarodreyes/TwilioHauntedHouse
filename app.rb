@@ -1007,7 +1007,7 @@ post '/tbtl-twiml?*' do
   response = Twilio::TwiML::Response.new do |r|
     r.Gather :action => "/tbtl" do |g|
       g.Play "http://hauntedhack.herokuapp.com/sounds/welcome.mp3"
-      g.Say "Press 1 for one T.B.T.L intro.... Press 2 for a random soundbite from T.B.T.L ."
+      g.Say "Press 1 for one T.B.T.L intro.... Press 2 for a random soundbite from T.B.T.L .", :voice => "alice", :language => "en-US" 
     end
     r.Redirect
   end
@@ -1050,7 +1050,7 @@ post '/tbtl?*' do
     r.Play media
     r.Say "Remember, no mountain to tall. And"
     r.Say "good luck to all!", :voice => "alice", :language => lang
-    r.Redirect '/voice'
+    r.Redirect '/tbtl-twiml'
   end
   return response.text
 end
