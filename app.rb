@@ -1003,7 +1003,7 @@ get '/live?*' do
   erb :live
 end
 
-post '/voice?*' do
+post '/tbtl-twiml?*' do
   response = Twilio::TwiML::Response.new do |r|
     r.Gather :action => "/tbtl" do |g|
       g.Play "http://hauntedhack.herokuapp.com/sounds/welcome.mp3"
